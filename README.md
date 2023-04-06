@@ -1,24 +1,43 @@
-# README
+# DB 設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users table
 
-Things you may want to cover:
+| Column          | Type             |Options        |
+| -------------| -------------|-------------|
+| nickname        | string           | null: false     |
+| email           | string           | unique: true, null: false  |
+| encrypted_password| string         | null: false  |
 
-* Ruby version
+### association
 
-* System dependencies
+* has_many :store
+* has_many :favorite
 
-* Configuration
+## stores table
 
-* Database creation
+| Column          | Type             |Options        |
+| -------------| -------------|-------------|
+| name            | string            | null: false  |
+| price           | integer           | null: false  |
+| place           | string            | null: false  |
+| favorite_menu   | string            | null: false  |
+| review          | text              | null: false  |
+| business_day    | datetime          | null: false  |
+| business_hours  | time              | null: false  |
+| image
 
-* Database initialization
+### association
 
-* How to run the test suite
+* belongs_to :user 
+* has_many : favorite
 
-* Services (job queues, cache servers, search engines, etc.)
+## favorites table
 
-* Deployment instructions
+| Column          | Type             |Options        |
+| -------------| -------------|-------------|
+| store_id        | string            | null: false  | 
 
-* ...
+### association
+
+* belongs_to :user
+* belongs_to :store
